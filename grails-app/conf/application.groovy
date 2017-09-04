@@ -16,52 +16,7 @@ println 'RUNNING APPLICATION ON: ' + serverName + ' - ENVIRONMENT=' + Environmen
 println ' '
 println '======================================================================================================='
 
-/****************************************************
- * Datasource configuration
- */
-String databaseName = 'gr3_quicks';
-String databaseUser = databaseName + "_user";
 
-trace("configuring datasource - databaseName=" + databaseName)
-
-dataSources {
-	
-	dataSource {
-		pooled          = true
-		dbCreate        = "update"
-		driverClassName = "com.mysql.jdbc.Driver"
-		formatSql       = true
-		logSql          = false
-		username        = databaseUser
-		password        = "password__1"
-		url             = "jdbc:mysql://localhost:3306/" + databaseName + "?useUnicode=yes&characterEncoding=UTF-8"
-		dialect         = "org.hibernate.dialect.MySQL5InnoDBDialect"
-		properties {
-			dbProperties {
-				// Mysql specific driver properties
-				// http://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html
-				// let Tomcat JDBC Pool handle reconnecting
-				autoReconnect = true
-			}
-			minIdle = 5
-			
-			maxActive = 50
-			maxIdle = 25
-			initialSize = 5
-			
-			minEvictableIdleTimeMillis = 1800000
-			timeBetweenEvictionRunsMillis = 1800000
-			maxWait = 10000
-	
-			// testOnBorrow = true
-			testWhileIdle = true
-			// testOnReturn = true
-			validationQuery = "SELECT 1"
-			timeBetweenEvictionRunsMillis=60000
-		}
-	}
-	
-}
 
 grails.plugins.hibernatesearch = {
 	rebuildIndexOnStart false
